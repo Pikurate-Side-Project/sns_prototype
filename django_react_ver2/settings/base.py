@@ -25,6 +25,9 @@ SECRET_KEY = 'ph#h^a5qi9@ktzn5z7i-v(f1=#np+bxil#4)iqb6f!3lk46=w-'
 
 ALLOWED_HOSTS = []
 
+ADMINS = [
+    ('Jerry Jho', 'jerry.jho@pikurate.com'),
+]
 
 # Application definition
 
@@ -135,3 +138,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 INTERNAL_IPS = ['127.0.0.1']
+
+# Email with Send Grid
+# SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+SENDGRID_API_KEY = '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'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+WELCOME_EMAIL_SENDER = 'jerry.jho@pikurate.com'
