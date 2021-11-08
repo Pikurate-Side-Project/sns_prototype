@@ -1,16 +1,10 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>Instagram</title>
 
-  <link rel="stylesheet" href="{% static 'bootstrap-4.6.1-dist/css/bootstrap.min.css' %}">
-  <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
-  <script src="{% static 'bootstrap-4.6.1-dist/js/bootstrap.min.js' %}"></script>
-</head>
-<body>
+{% include "head.html" %}
+
+<body style="font-family: 'NanumSquareR';">
+
 <div>
   {% for message in messages %}
     <div class="alert alert-{{ message.tags }}">
@@ -19,76 +13,12 @@
   {% endfor %}
 </div>
 
-<div class="border-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white">
-                    <h5 class="my-0 mr-md-auto font-weight-normal">
-                        SNS prototype
-                    </h5>
-                    <nav class="my-2 my-md-0 mr-md-3">
-                      {% if user.is_authenticated %}
-                        <img src="{% url 'pydenticon_image' user.username %}" style="width: 2rem; height: 2rem;">
-                        <a class="p-2 text-dark" href="{% url 'accounts:login' %}">프로필</a>
-                      {% else %}
-                        <a class="p-2 text-dark" href="{% url 'accounts:login' %}">로그인</a>
-                      {% endif %}
-                    </nav>
-                    {% if user.is_authenticated %}
-                      <a class="btn btn-outline-primary" href="{% url 'accounts:logout' %}">로그아웃</a>
-                    {% else %}
-                      <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">회원가입</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% include "header.html" %}
 
 {% block content %}
 {% endblock %}
 
-<div class="border-top">
-    <div class="container">
-        <div class="my-md-5">
-            <div class="row">
-              <div class="col-12 col-md">
-                <small class="d-block mb-3 text-muted">© 2021</small>
-              </div>
-              <div class="col-6 col-md">
-                <h5>Features</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">Cool stuff</a></li>
-                  <li><a class="text-muted" href="#">Random feature</a></li>
-                  <li><a class="text-muted" href="#">Team feature</a></li>
-                  <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                  <li><a class="text-muted" href="#">Another one</a></li>
-                  <li><a class="text-muted" href="#">Last time</a></li>
-                </ul>
-              </div>
-              <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">Resource</a></li>
-                  <li><a class="text-muted" href="#">Resource name</a></li>
-                  <li><a class="text-muted" href="#">Another resource</a></li>
-                  <li><a class="text-muted" href="#">Final resource</a></li>
-                </ul>
-              </div>
-              <div class="col-6 col-md">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="#">Team</a></li>
-                  <li><a class="text-muted" href="#">Locations</a></li>
-                  <li><a class="text-muted" href="#">Privacy</a></li>
-                  <li><a class="text-muted" href="#">Terms</a></li>
-                </ul>
-              </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% include "footer.html" %}
 
 </body>
 </html>
