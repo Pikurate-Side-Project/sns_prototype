@@ -8,8 +8,12 @@
                     </h5>
                     <nav class="my-2 my-md-0 mr-md-3">
                       {% if user.is_authenticated %}
-                        <img src="{% url 'pydenticon_image' user.username %}" style="width: 2rem; height: 2rem;">
-                        <a class="p-2 text-dark" href="{% url 'accounts:login' %}">프로필</a>
+                        {% if user.avatar %}
+                          <img src="{{ user.avatar.url }}" class="rounded-circle" style="width: 2rem; height: 2rem;">
+                        {% else %}
+                          <img src="{% url 'pydenticon_image' user.username %}" class="rounded-circle" style="width: 2rem; height: 2rem;">
+                        {% endif %}
+                        <a class="p-2 text-dark" href="{% url 'accounts:profile_edit' %}">프로필</a>
                       {% else %}
                         <a class="p-2 text-dark" href="{% url 'accounts:login' %}">로그인</a>
                       {% endif %}

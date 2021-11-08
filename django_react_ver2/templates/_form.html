@@ -10,11 +10,17 @@
                     </div>
                 {% endif %}
                 <div class="card-body">
-                    <form action="" enctype="multipart/form-data" method="post">
-                        {% csrf_token %}
-                        {% bootstrap_form form %}
-                        <input type="submit" value="{{ submit_label|default:'Submit' }}" class="btn btn-primary">
-                    </form>
+                    {% if form %}
+                        <form action="" enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <input type="submit" value="{{ submit_label|default:'Submit' }}" class="btn btn-primary">
+                        </form>
+                    {% else %}
+                        <div class="alert alert-danger">
+                            form 객체를 지정해 주세요.
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

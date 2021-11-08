@@ -1,10 +1,11 @@
 from django import forms
-from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.views import LoginView, logout_then_login
 
-from .forms import SignupForm
+from .forms import ProfileForm, SignupForm
 
 def signup(request):
     if request.method == 'POST':
@@ -27,3 +28,18 @@ login = LoginView.as_view(template_name='accounts/login_form.html')
 def logout(request):
     messages.success(request, '로그아웃이 되었습니다.')
     return logout_then_login(request)
+
+@login_required
+def profile_edit(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '프로필 수정이 완료되었습니다.')
+            return redirect('accounts:profile_edit')
+    else:
+        form = ProfileForm(instance=request.user)
+
+    return render(request, 'accounts/profile_edit.html', {
+        'form': form,
+    })
