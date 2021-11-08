@@ -1,8 +1,9 @@
-from django.shortcuts import redirect, render
+from django.http.response import Http404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .models import Tag
+from .models import Post, Tag
 from .forms import PostForm
 
 # Create your views here.
@@ -22,4 +23,14 @@ def post_new(request):
 
     return render(request, 'feeds/post_new_form.html', {
         'form': form,
+    })
+
+def post_detail(request, pk):
+    try:
+        post = get_object_or_404(Post, pk=pk)
+    except Post.DoesNotExist:
+        raise Http404('해당 모델이 존재하지 않습니다.')
+
+    return render(request, 'feeds/post_detail.html', {
+        'post': post,
     })

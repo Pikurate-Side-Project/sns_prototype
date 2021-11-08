@@ -7,4 +7,5 @@ app_name = 'feeds'
 
 urlpatterns = [
     path('post/', views.post_new, name='post'),
+    path('detail/<int:pk>/', views.post_detail, name='post_detail'),
 ]
