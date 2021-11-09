@@ -2,12 +2,30 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-body">
-            <img src="{{ post.photo.url }}" alt="" style="width: 3rem; height: 3rem;">
-            <div>
-                {{ post.caption }}
+<div class="container my-3">
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    <img src="{{ post.author.avatar_url }}" class="rounded-circle" style="width: 2rem; height: 2rem;">
+                    {{ post.author.name }}
+                </div>
+                <div class="card-body">
+                    <img src="{{ post.photo.url }}" style="width: 10rem; height: 10rem;">
+                    <div>
+                        {{ post.caption }}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    {% for tag_name in post.tag_set.all %}
+                        <span class="badge badge-primary">
+                            {{ tag_name }} 
+                        </span>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
+</div>
+
 {% endblock content %}

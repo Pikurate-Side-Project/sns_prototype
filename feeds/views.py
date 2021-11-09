@@ -17,7 +17,7 @@ def post_new(request):
             post.save()
             post.tag_set.add(*post.extract_tag_list())
             messages.success(request, '새 포스팅이 저장되었습니다.')
-            return redirect('root') # TODO: get_absolute_url 활용
+            return redirect(post)
     else:
         form = PostForm()
 
